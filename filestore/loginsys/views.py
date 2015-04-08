@@ -40,7 +40,7 @@ def register(request):
     args['form'] = UserCreationForm()
     if request.POST:
         newuser_form = UserCreationForm(request.POST)
-        if newuser_form.is_valid():
+        if newuser_form.is_valid() and len(newuser_form.cleaned_data['username']) > 5 and len(newuser_form.cleaned_data['password2']) > 5:
             newuser_form.save()
             newuser = auth.authenticate(username=newuser_form.cleaned_data['username'],
                                         password=newuser_form.cleaned_data['password2'])
